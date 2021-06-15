@@ -1,0 +1,553 @@
+{
+  "users": [
+    {
+      "name": "Esperanza",
+      "surname": "Test",
+      "birthday": "1981-12-29T16:20:12.827Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/26.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/26.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/26.jpg"
+      },
+      "professions": [
+        {
+          "id": 1,
+          "title": "Frontend Developer",
+          "salary": 80000,
+          "responsibilities": [
+            "code review",
+            "write a code"
+          ]
+        }
+      ],
+      "id": 1
+    },
+    {
+      "name": "Maurice",
+      "surname": "George",
+      "birthday": "1956-11-04T15:38:41.789Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/36.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/36.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/36.jpg"
+      },
+      "id": 2
+    },
+    {
+      "name": "Test",
+      "surname": "TestTwo",
+      "birthday": "1946-11-07T19:08:21.821Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/26.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/26.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/26.jpg"
+      },
+      "id": 4
+    },
+    {
+      "name": "Ella",
+      "surname": "Lincoln",
+      "birthday": "1954-03-24T06:01:47.928Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/34.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/34.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/34.jpg"
+      },
+      "id": 5
+    },
+    {
+      "name": "Kristin",
+      "surname": "Warrend",
+      "birthday": "1956-07-10",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/94.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/94.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/94.jpg"
+      },
+      "id": 6
+    },
+    {
+      "name": "Bryan",
+      "surname": "Morgann",
+      "birthday": "1970-09-03",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/0.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/0.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/0.jpg"
+      },
+      "id": 9
+    },
+    {
+      "name": "Alex",
+      "surname": "Li",
+      "birthday": "1947-12-21T15:17:10.571Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/53.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/53.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/53.jpg"
+      },
+      "id": 10
+    },
+    {
+      "name": "Siiri",
+      "surname": "Jutila",
+      "birthday": "1984-07-24T10:58:49.557Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/52.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/52.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/52.jpg"
+      },
+      "id": 11
+    },
+    {
+      "name": "Latife",
+      "surname": "Akan",
+      "birthday": "1981-06-29T08:14:34.930Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/22.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/22.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/22.jpg"
+      },
+      "id": 12
+    },
+    {
+      "name": "ZZZپوریا",
+      "surname": "گلشن",
+      "birthday": "1962-10-01T21:31:39.867Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/24.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/24.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/24.jpg"
+      },
+      "id": 15
+    },
+    {
+      "name": "Alexis",
+      "surname": "Andersen",
+      "birthday": "1961-05-09T06:05:08.409Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/72.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/72.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/72.jpg"
+      },
+      "id": 16
+    },
+    {
+      "name": "Lima",
+      "surname": "Moreira",
+      "birthday": "1978-10-19T23:43:25.303Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/48.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/48.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/48.jpg"
+      },
+      "id": 17
+    },
+    {
+      "name": "Christopher",
+      "surname": "Wallace",
+      "birthday": "1983-06-20T19:16:07.602Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/25.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/25.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/25.jpg"
+      },
+      "id": 18
+    },
+    {
+      "name": "Eira",
+      "surname": "Nesse",
+      "birthday": "1996-11-07T00:37:37.672Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/42.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/42.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/42.jpg"
+      },
+      "id": 19
+    },
+    {
+      "name": "رونیکا",
+      "surname": "قاسمی",
+      "birthday": "1970-01-11T19:39:54.766Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/2.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/2.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/2.jpg"
+      },
+      "id": 20
+    },
+    {
+      "name": "Sophia",
+      "surname": "Perrin",
+      "birthday": "1982-12-17T11:17:55.787Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/91.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/91.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/91.jpg"
+      },
+      "id": 21
+    },
+    {
+      "name": "Zoe",
+      "surname": "Côté",
+      "birthday": "1973-01-20T13:51:30.672Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/73.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/73.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/73.jpg"
+      },
+      "id": 22
+    },
+    {
+      "name": "Mar",
+      "surname": "Ribeiro",
+      "birthday": "1946-03-06T23:53:28.944Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/97.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/97.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/97.jpg"
+      },
+      "id": 23
+    },
+    {
+      "name": "Guadalberto",
+      "surname": "da Paz",
+      "birthday": "1958-11-18T10:10:01.921Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/52.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/52.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/52.jpg"
+      },
+      "id": 24
+    },
+    {
+      "name": "Nomi",
+      "surname": "Verhoeks",
+      "birthday": "1989-08-03T10:28:16.007Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/59.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/59.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/59.jpg"
+      },
+      "id": 25
+    },
+    {
+      "name": "Scarlett",
+      "surname": "Payneаппар",
+      "birthday": "1958-08-14",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/women/66.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/women/66.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/women/66.jpg"
+      },
+      "id": 26
+    },
+    {
+      "name": "Noah",
+      "surname": "Andersenпарпар",
+      "birthday": "1961-01-04T18:02:54.670Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/0.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/0.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/0.jpg"
+      },
+      "id": 27
+    },
+    {
+      "name": "Damas",
+      "surname": "Silva",
+      "birthday": "1977-12-30T14:47:09.791Z",
+      "picture": {
+        "large": "https://randomuser.me/api/portraits/men/80.jpg",
+        "medium": "https://randomuser.me/api/portraits/med/men/80.jpg",
+        "thumbnail": "https://randomuser.me/api/portraits/thumb/men/80.jpg"
+      },
+      "id": 28
+    }
+  ],
+  "professions": [
+    {
+      "id": 1,
+      "title": "Frontend Developer",
+      "salary": 80000,
+      "responsibilities": [
+        "code review",
+        "write a code"
+      ]
+    },
+    {
+      "title": "New Profession",
+      "salary": "65000",
+      "responsibilities": {},
+      "id": 2
+    },
+    {
+      "title": "Test",
+      "salary": "76000",
+      "responsibilities": {},
+      "id": 3
+    },
+    {
+      "title": "Another Test",
+      "salary": "75000",
+      "responsibilities": {},
+      "id": 4
+    },
+    {
+      "title": "Another Test",
+      "salary": "75000",
+      "responsibilities": [
+        "Test duty",
+        "Another test duty"
+      ],
+      "id": 5
+    },
+    {
+      "title": "Another Test",
+      "salary": "75000",
+      "responsibilities": [
+        "Test duty",
+        "Another test duty"
+      ],
+      "id": 6
+    },
+    {
+      "title": "Another Test 2",
+      "salary": "123000",
+      "responsibilities": [
+        "Another duty",
+        "duty",
+        "New duty",
+        "work"
+      ],
+      "id": 7
+    },
+    {
+      "title": "Title",
+      "salary": "40000",
+      "responsibilities": [
+        "NEw",
+        "dsfsdfsd"
+      ],
+      "id": 8
+    },
+    {
+      "title": "sdasdasdsad",
+      "salary": "355555",
+      "responsibilities": [
+        "dsfsdfsdffsdfsdfsdf",
+        "fsdfsfsdfsdf",
+        "Qdsfsdfsdf"
+      ],
+      "id": 9
+    },
+    {
+      "title": "Testdsfsd",
+      "salary": "65000",
+      "responsibilities": [
+        "dsfsdgdfsg",
+        "dfdsfhgsdfhdsfghdfghdfgh"
+      ],
+      "id": 10
+    },
+    {
+      "title": "Test3",
+      "salary": "50000",
+      "responsibilities": [
+        "dsfsdfsdf",
+        "dsfsd fdsfsd",
+        "dsgsdfggsdf"
+      ],
+      "id": 11
+    },
+    {
+      "title": "sdfsd",
+      "salary": "332243",
+      "responsibilities": [
+        "fdsgsdfgsdfgsdfg",
+        "fdgsdfgsdfgdsfg"
+      ],
+      "id": 12
+    },
+    {
+      "title": "dsfsdfsdf",
+      "salary": "0322323",
+      "responsibilities": [
+        "gvdfgdfgsdfgsdfgdsfgdf"
+      ],
+      "id": 13
+    },
+    {
+      "title": "hgjghj",
+      "salary": "444444",
+      "responsibilities": [
+        "jkhjkhjkhjk"
+      ],
+      "id": 14
+    },
+    {
+      "title": "Новая профессия",
+      "salary": "67000",
+      "responsibilities": [
+        "работать"
+      ],
+      "id": 15
+    },
+    {
+      "title": "Новая профессия",
+      "salary": "67000",
+      "responsibilities": [
+        "работать"
+      ],
+      "id": 16
+    },
+    {
+      "title": "Тест на реактивность мапы",
+      "salary": "666666",
+      "responsibilities": [
+        "тест на реактивность мапы"
+      ],
+      "id": 17
+    },
+    {
+      "title": "fsdfsdfsd",
+      "salary": "2324423",
+      "responsibilities": [
+        "dfgdfgsdfgsdf"
+      ],
+      "id": 18
+    },
+    {
+      "title": "fsdfsdfsd",
+      "salary": "2324423",
+      "responsibilities": [
+        "dfgdfgsdfgsdf"
+      ],
+      "id": 19
+    },
+    {
+      "title": "fsdfsdfsd",
+      "salary": "2324423",
+      "responsibilities": [
+        "dfgdfgsdfgsdf"
+      ],
+      "id": 20
+    },
+    {
+      "title": "Another One Test",
+      "salary": "77777",
+      "responsibilities": [
+        "asdasd"
+      ],
+      "id": 21
+    },
+    {
+      "title": "Another One Test",
+      "salary": "77777",
+      "responsibilities": [
+        "asdasd"
+      ],
+      "id": 22
+    },
+    {
+      "title": "Another One Test",
+      "salary": "77777",
+      "responsibilities": [
+        "asdasd"
+      ],
+      "id": 23
+    },
+    {
+      "title": "Another One Test",
+      "salary": "77777",
+      "responsibilities": [
+        "asdasd"
+      ],
+      "id": 24
+    },
+    {
+      "title": "Another One Test",
+      "salary": "77777",
+      "responsibilities": [
+        "asdasd"
+      ],
+      "id": 25
+    },
+    {
+      "title": "edsffsdfadsf",
+      "salary": "213123",
+      "responsibilities": [
+        "dsfasdfsadfsdfasdf"
+      ],
+      "id": 26
+    },
+    {
+      "title": "sdfsdfsdfsdfsdf",
+      "salary": "32342",
+      "responsibilities": [
+        "gvcbxcvbxcvbxcvbxcvbxcvb"
+      ],
+      "id": 27
+    },
+    {
+      "title": "dfsgdfgsdfgsdfg",
+      "salary": "25000",
+      "responsibilities": [
+        "gvbcnxvcnbxcvbxcvbxcvbcvb"
+      ],
+      "id": 28
+    }
+  ],
+  "timeline": [
+    {
+      "title": "День 1 (обдумывание архитектуры и \"блицкриг\")",
+      "body": "Обдумывал архитектуру... Обдумывал... (куда думал - не знаю, местами плакать хочется)\nПлан:\nШаг 1: пишу проект на ts\nШаг 2: пишу проект на js\nага... разогнался ",
+      "id": 1
+    },
+    {
+      "title": "День 1 (конфигопись) test 2",
+      "body": "Провозился всю ночь с конфигом... кто ж знал что там так всё весело с Vuetify\np.s. никогда не настраивал проект typescript под nuxt решил попробовать\np.p.s. StyleResources и vuetify custom variables - это жесть\np.p.p.s. ресурсы стилей и кастомизация vuetify до сих пор через костыли работают (ну хоть работают)\n   проблема: версия sass, sass-loader, варнинги о депрекейтед синтаксисе\n   решение: поставил пакеты старых версий,  и новая проблема: custom variables пытался подтянуть ресурсы, причем неудачно\n   решение 2: кастомизация vuetify теперь на sass, styleResources на scss\n   отдельная история с попытками запустить store, интеграцией с апи (использовал проксирование)\n   ",
+      "id": 2
+    },
+    {
+      "title": "День 2 (конфигопись)",
+      "body": "Проблема со стилями решилась только сегодня\nРешил настроить линтер (вовремя, уже employees) написан полностью, ладно, будем надеяться что везде всё писал как линтёр скажет",
+      "id": 3
+    },
+    {
+      "title": "День 2 (обучение)",
+      "body": "Решил почитать за Map, Set и джейнерики в typescript\nMap, Set: после более подробного изучения понял что использовал в большинстве случаев их неправильно\ngeneric на c++ зовётся мета-программированием по сути крутой инструмент полиморфизма. Обобщение типа для функций и классов\nможно было красиво использовать их для расширения типов в проекте. К сожалению не могу описать сколько всего понял за время обучения... Свой план уже провалил :D (привет из дня 3)",
+      "id": 4
+    },
+    {
+      "title": "День 2 (сомнения)",
+      "body": "Подход который я использую в корне неверный.\nМожно было применить шаблоны проектирования, но боюсь что стал бы отстреливать себе конечности\nНо можно было бы реализовать для сущностей стратегию, добавить внутреннюю реализацию и расширение одного типа до другого, боюсь времени уже нет",
+      "id": 5
+    },
+    {
+      "title": "День 3 (интерфейсы пользователя 2)",
+      "body": "интерфейс накидываю почти не задумываясь за пару часов, однако функционал готов лишь приблизительно на 35-40%",
+      "id": 6
+    },
+    {
+      "title": "День 3 (делай проще)",
+      "body": "Всё больше осознаю что отстреливаю себе конечности... Не люблю срезать углы но тут уже реально нужно делать проще",
+      "id": 7
+    },
+    {
+      "title": "День 3 (идеи, которые я уже не реализую)",
+      "body": "Попробовать отнаследоваться от Set или дополнить прототип для добавления find/ findIndex/ indexOf",
+      "id": 8
+    },
+    {
+      "title": "Уже опоздал на свой челлендж",
+      "body": "Отстрел конечностей... Регулярочка проверки full name - огонь!",
+      "id": 9
+    },
+    {
+      "title": "Мап для хранения профессий",
+      "body": "очень-очень плохая идея... плюсы: не надо заботиться о том что попадутся две одинаковые профессии и улетят в базу... минусы: ключами должны быть строки, с тайтлами профессий, чтобы для обеспечения реактивности надо постоянно пересоздавать всю мапу и не дай бог где-нибудь на неё останется ссылка, которую не сможет подчистить сборщик мусора, для вывода профессий в любых местах где это необходимо нужно перебрать, опять же, всю мапу. Идея: так себе, короче... Вопрос: как сделать это правильно?  Из идей: 1) прототипирование Мапы (тоже не решит все проблемы в данном случае). 2) Свой мап на основе массивов.",
+      "id": 10
+    }
+  ]
+}
