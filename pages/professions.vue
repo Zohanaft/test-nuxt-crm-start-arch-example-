@@ -100,8 +100,10 @@
 <script lang="ts">
 import { Vue, Component, Ref } from 'vue-property-decorator'
 
-import { ProfessionsModule } from '~/store/professions'
 import { IProfession } from '~/models/profession'
+
+import { ProfessionsModule } from '~/store/professions'
+import { AppModule } from '~/store/app'
 
 @Component
 export default class PProfessions extends Vue {
@@ -176,6 +178,10 @@ export default class PProfessions extends Vue {
     this.setDefaultAdditional()
     this.responsibilities.splice(0, this.responsibilities.length)
     this.responsibilities.push('')
+  }
+
+  created () {
+    AppModule.SET_TITLE('Professions')
   }
 }
 </script>
