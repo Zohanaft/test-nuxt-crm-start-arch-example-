@@ -1,84 +1,88 @@
 <template>
-  <div
-    class="col-3 pt-0"
+  <v-card
+    v-if="person"
+    class="ma-1 pa-3"
   >
-    <v-card
-      v-if="person"
-      class="ma-1 pa-3"
-    >
-      <div class="row ma-0">
+    <div class="row ma-0">
+      <nuxt-link :to="`/employees/${person.id}`">
         <v-avatar size="40">
           <v-img :src="person.picture.thumbnail" />
         </v-avatar>
-        <v-spacer />
-        <v-btn
-          plain
-          fab
-          small
-          depressed
-          @click="$emit('remove', person.id)"
-        >
-          <v-icon>mdi-account-remove</v-icon>
-        </v-btn>
-      </div>
-      <v-row class="ma-0 align-center">
+      </nuxt-link>
+      <v-spacer />
+      <v-btn
+        v-show="editable"
+        plain
+        fab
+        small
+        depressed
+        @click="$emit('remove', person.id)"
+      >
+        <v-icon>mdi-account-remove</v-icon>
+      </v-btn>
+    </div>
+    <v-row class="ma-0 align-center">
+      <nuxt-link :to="`/employees/${person.id}`">
         <v-card-title v-if="!fullnameEditor">
           {{ fullName }}
         </v-card-title>
-        <v-text-field
-          v-if="fullnameEditor"
-          v-model="fullNameCopy"
-          :rules="[rules.fullName, rules.required]"
-          @blur="closeNameEditorOnValidate()"
-          @keydown="onKeyDown($event)"
-        />
-        <v-btn
-          plain
-          fab
-          x-small
-          depressed
-          @click="fullnameEditor = true"
+      </nuxt-link>
+      <v-text-field
+        v-if="fullnameEditor"
+        v-model="fullNameCopy"
+        :rules="[rules.fullName, rules.required]"
+        @blur="closeNameEditorOnValidate()"
+        @keydown="onKeyDown($event)"
+      />
+      <v-btn
+        v-show="editable"
+        plain
+        fab
+        x-small
+        depressed
+        @click="fullnameEditor = true"
+      >
+        <v-icon>
+          mdi-pencil
+        </v-icon>
+      </v-btn>
+    </v-row>
+    <v-card-text>
+      {{ `My birthday: ${formatDate(picker)}` }}
+      <v-menu
+        v-model="datePickerMenu"
+        bottom
+        offset-y
+        :close-on-content-click="false"
+        :close-on-click="false"
+      >
+        <template
+          #activator="{ on, attrs }"
         >
-          <v-icon>
-            mdi-pencil
-          </v-icon>
-        </v-btn>
-      </v-row>
-      <v-card-text>
-        {{ `My birthday: ${formatDate(picker)}` }}
-        <v-menu
-          v-model="datePickerMenu"
-          bottom
-          offset-y
-          :close-on-content-click="false"
-          :close-on-click="false"
-        >
-          <template
-            #activator="{ on, attrs }"
+          <v-btn
+            v-show="editable"
+            plain
+            fab
+            x-small
+            depressed
+            v-bind="attrs"
+            v-on="{ ...on }"
           >
-            <v-btn
-              plain
-              fab
-              x-small
-              depressed
-              v-bind="attrs"
-              v-on="{ ...on }"
-            >
-              <v-icon>
-                mdi-pencil
-              </v-icon>
-            </v-btn>
-          </template>
-          <v-card>
-            <v-date-picker
-              v-model="picker"
-              @change="updatePersonBirthday($event)"
-            />
-          </v-card>
-        </v-menu>
-      </v-card-text>
-    </v-card>
-  </div>
+            <v-icon>
+              mdi-pencil
+            </v-icon>
+          </v-btn>
+        </template>
+        <v-card>
+          <v-date-picker
+            v-model="picker"
+            @change="updatePersonBirthday($event)"
+          />
+        </v-card>
+      </v-menu>
+    </v-card-text>
+    <slot />
+  </v-card>
 </template>
 
 <script lang="ts">
@@ -91,6 +95,7 @@ export default class CEmployeeCard extends Vue {
   // В данном контексте известно что это тип IEmloyee, но если необходимо будет
   // отправить данные базирующиеся на интерфейсе IEmployee - придётся добавлять сюда модели
   @Prop({ type: Object }) public person!: any;
+  @Prop({ type: Boolean, default: true }) public editable!: boolean;
 
   public formatDate (str: string) {
     return new Date(str)

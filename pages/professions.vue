@@ -6,13 +6,14 @@
         small
         plain
         elevation="3"
-        @click="professionAppendMenuOpen"
+        @click="setDefaultAdditional() ,professionAppendMenuOpen()"
       >
         <v-icon>mdi-plus</v-icon>
       </v-btn>
     </v-list>
     <v-dialog
       v-model="onAppendProfessionState"
+      max-width="400px"
       eager
     >
       <v-card
@@ -29,7 +30,7 @@
           </v-card-title>
           <v-text-field
             v-model="additionalProfession.title"
-            :rules="[rules.counter, rules.required, rules.professionExists]"
+            :rules="[rules.counter, rules.required, rules.professionExists(additionalProfession)]"
             autofocus
           />
           <v-card-title class="pa-0">
@@ -50,9 +51,23 @@
             >
               <v-text-field
                 :value="responsibility"
-                :rules="[rules.counter, rules.required, rules.equalResponsibilities]"
+                :rules="[
+                  rules.counter,
+                  rules.required,
+                  rules.equalResponsibilities(responsibility)
+                ]"
                 @input="updateRresponsibility($event, index)"
               />
+              <v-btn
+                plain
+                fab
+                small
+                depressed
+                class="ml-auto mx-2"
+                @click.stop="removeRresponsibility(index)"
+              >
+                <v-icon>mdi-delete</v-icon>
+              </v-btn>
             </v-list-item>
             <v-btn
               fab
@@ -86,12 +101,23 @@
       <v-list-item
         v-for="[index, profession] of professions"
         :key="index"
-        class="col-3 pa-0 mb-6 px-3"
-        @click="patchProfession(profession)"
+        class="col-3 pa-0 mb-6 relative"
+        @click.stop="patchProfession(profession)"
       >
         <profession-card
           :profession="profession"
         />
+        <v-btn
+          plain
+          fab
+          small
+          depressed
+          class="ml-auto mx-3 absolute"
+          style="top: 12px; right: 12px"
+          @click.stop="removeProfession(profession.title)"
+        >
+          <v-icon>mdi-delete</v-icon>
+        </v-btn>
       </v-list-item>
     </v-list>
   </v-container>
@@ -102,6 +128,7 @@ import { Vue, Component, Ref } from 'vue-property-decorator'
 
 import { IProfession } from '~/models/profession'
 
+import { EmployeesModule } from '~/store/employees'
 import { ProfessionsModule } from '~/store/professions'
 import { AppModule } from '~/store/app'
 
@@ -120,6 +147,8 @@ export default class PProfessions extends Vue {
   }
 
   public setDefaultAdditional () {
+    this.responsibilities.splice(0, this.responsibilities.length)
+    this.responsibilities.push('')
     this.additionalProfession = {
       title: '',
       salary: 0
@@ -127,8 +156,12 @@ export default class PProfessions extends Vue {
   }
 
   public patchProfession (profession: IProfession) {
-    this.responsibilities = profession.responsibilities as Array<string>
+    this.responsibilities.splice(0, this.responsibilities.length)
+    this.responsibilities.push(...profession.responsibilities as Array<string>)
     this.additionalProfession = profession
+    this.additionalProfession = Object.assign({
+      responsibilities: profession.responsibilities as Array<string>
+    }, profession)
     this.professionAppendMenuOpen()
   }
 
@@ -138,12 +171,19 @@ export default class PProfessions extends Vue {
     this.responsibilities.splice(index, 1, responsibility)
   }
 
+  public removeRresponsibility (index: number) {
+    this.responsibilities.splice(index, 1)
+  }
+
   public rules = {
     required: (value: string) => !!value || 'Required.',
-    counter: (value: string) => value.length >= 3 || 'Needs more 3 characters',
-    // value - должен быть ссылкой на объект нужно будет переписать грамотнее
-    professionExists: (value: string) =>
-      !this.professions.has(value) || 'Profession allready exists',
+    counter: (value: string) => value.length >= 2 || 'Needs more 2 characters',
+    professionExists: (value: IProfession) => {
+      if (value.id !== undefined) {
+        return true
+      }
+      return !this.professions.has(value.title) || 'Profession allready exists'
+    },
     equalResponsibilities: (value: string) => {
       const count = this.responsibilities.filter(el => el === value)
       return !(count.length > 1) || 'This responsibility allready exists'
@@ -163,6 +203,12 @@ export default class PProfessions extends Vue {
     this.onAppendProfessionState = false
   }
 
+  public async removeProfession (event: string) {
+    await ProfessionsModule.DELETE_PROFESSION(event)
+    await EmployeesModule.ON_DELETE_PROFESSION(event)
+    this.setDefaultAdditional()
+  }
+
   public async validate () {
     this.form.validate()
     if (this.isFormValid) {
@@ -173,11 +219,13 @@ export default class PProfessions extends Vue {
   public async submit () {
     const prof: IProfession = this.additionalProfession
     prof.responsibilities = this.responsibilities
-    await ProfessionsModule.ADD_NEW_PROFESSION(prof)
+    if (prof.id) {
+      await ProfessionsModule.PATCH_PROFESSION(prof)
+    } else {
+      await ProfessionsModule.ADD_NEW_PROFESSION(prof)
+    }
     this.professionAppendMenuClose()
     this.setDefaultAdditional()
-    this.responsibilities.splice(0, this.responsibilities.length)
-    this.responsibilities.push('')
   }
 
   created () {
@@ -185,3 +233,23 @@ export default class PProfessions extends Vue {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+::v-deep .v-list-item--link {
+  &:before {
+    margin: 12px;
+  }
+}
+
+::v-deep .v-list-item {
+  &:after {
+    content: none;
+  }
+}
+
+::v-deep .v-list-item > .v-ripple__container {
+  width: calc(100% - 24px) !important;
+  right: 12px;
+  left: 12px;
+}
+</style>

@@ -41,7 +41,7 @@
         cols="12"
         class="d-flex"
       >
-        <nuxt />
+        <nuxt v-if="loaded" />
       </v-col>
     </v-main>
     <v-navigation-drawer
@@ -105,6 +105,7 @@ export default class LDefault extends Vue {
   rightDrawer = false;
 
   public get title () { return AppModule.title }
+  public get loaded () { return ProfessionsModule.loaded }
 
   // Store data
 }

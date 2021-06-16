@@ -1,17 +1,24 @@
 <template>
-  <v-card>
+  <v-card class="d-flex flex-column mx-3">
     <v-card-title>
       {{ profession.title }}
     </v-card-title>
-    <v-list>
-      <v-list-item
-        v-for="(responsibility, index) of profession.responsibilities"
-        :key="index"
-        class="py-0 my-0"
-      >
-        {{ responsibility }}
-      </v-list-item>
-    </v-list>
+    <v-chip
+      v-for="(responsibility, index) of profession.responsibilities"
+      :key="index"
+      color="primary"
+      class="py-0 mt-0 ma-3"
+    >
+      {{ responsibility }}
+    </v-chip>
+    <v-alert
+      dense
+      text
+      class="mx-3 mt-auto"
+      type="success"
+    >
+      {{ `salary: ${profession.salary}` }}
+    </v-alert>
   </v-card>
 </template>
 
@@ -27,3 +34,10 @@ export default class CProfessionCard extends Vue {
   @Prop({ type: Object }) public profession!: any
 }
 </script>
+
+<style lang="scss" scoped>
+.v-card {
+  width: 100%;
+  height: 100%;
+}
+</style>

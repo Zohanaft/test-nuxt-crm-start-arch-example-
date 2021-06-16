@@ -9,6 +9,7 @@ import {
 import { store } from '~/store/index'
 
 import { IEmployee } from '~/models/employee'
+import { IQueryParams } from '~/models/query-params'
 
 import {
   getNewEmployee,
@@ -81,15 +82,50 @@ class Employees extends VuexModule {
   @Mutation
   async ADD_NEW_EMPLOYEE () {
     const employee = await getNewEmployee()
+
     const processedEmployee: IEmployee = {
       name: employee.data.results[0].name.first,
       surname: employee.data.results[0].name.last,
       birthday: new Date(employee.data.results[0].dob.date),
       picture: employee.data.results[0].picture
     }
+
     const response = await putEmployee(processedEmployee)
-    const emp: IEmployee = response.data
-    this.employees.push(emp)
+    const resultEmployee: IEmployee = response.data
+
+    this.employees.push(resultEmployee)
+  }
+
+  @Mutation
+  async ON_DELETE_PROFESSION (title: string) {
+    // выполняю кусок логики которая должна быть на сервере
+    const response = await getEmployees({ professions_like: title })
+    const allSortableByTitleEmployees = response.data
+    allSortableByTitleEmployees.forEach((employee: IEmployee) => {
+      const index = employee!.professions!.findIndex(prof => prof === title)
+      employee.professions!.splice(index, 1)
+      patchEmployee(employee)
+    })
+
+    // на фронте
+    this.employees.forEach((employee) => {
+      const index = employee!.professions!.findIndex(prof => prof === title)
+      employee.professions!.splice(index, 1)
+    })
+  }
+
+  @Action
+  async getEmployeeById (id: number) {
+    const response = await getEmployees({ id })
+    const employee = response.data[0]
+    return employee
+  }
+
+  @Action
+  async getEmployees (params: IQueryParams): Promise<Array<IEmployee>> {
+    const response = await getEmployees(params)
+    const resultByParamsEmployees: Array<IEmployee> = response.data
+    return resultByParamsEmployees
   }
 
   @Action

@@ -8,5 +8,5 @@ export interface IEmployee {
     medium: string,
     thumbnail: string
   },
-  professions?: Array<number>
+  professions?: Array<string>
 }
