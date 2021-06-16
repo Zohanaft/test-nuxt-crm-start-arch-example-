@@ -1,36 +1,74 @@
 <template>
   <v-row>
-    <v-list class="col-12 px-3 d-flex">
-      <!-- TODO: это доделать
-      <v-btn-toggle
-        v-model="searchParams"
-        rounded
-      >
-        <v-btn>
-          <v-icon>mdi-format-align-left</v-icon>
-        </v-btn>
-        <v-btn>
-          <v-icon>mdi-format-align-center</v-icon>
-        </v-btn>
-        <v-btn>
-          <v-icon>mdi-format-align-right</v-icon>
-        </v-btn>
-        <v-btn>
-          <v-icon>mdi-format-align-justify</v-icon>
-        </v-btn>
-      </v-btn-toggle>
-      -->
+    <v-list class="col-12 px-3 d-flex align-center">
+      <v-tooltip bottom>
+        <template #activator="{ on, attrs }">
+          <v-btn
+            fab
+            small
+            plain
+            elevation="1"
+            :dark="fSearchByResponsibility"
+            v-bind="attrs"
+            v-on="on"
+            @click="fSearchByResponsibility = !fSearchByResponsibility"
+          >
+            <v-icon>R</v-icon>
+          </v-btn>
+        </template>
+        <span>Search By Responsibility</span>
+      </v-tooltip>
+
+      <v-tooltip bottom>
+        <template #activator="{ on, attrs }">
+          <v-btn
+            fab
+            small
+            plain
+            elevation="1"
+            :dark="fSearchByName"
+            v-bind="attrs"
+            v-on="on"
+            @click="fSearchByName = !fSearchByName"
+          >
+            <v-icon>S</v-icon>
+          </v-btn>
+        </template>
+        <span>Search By Surname</span>
+      </v-tooltip>
+
+      <v-tooltip bottom>
+        <template #activator="{ on, attrs }">
+          <v-btn
+            fab
+            small
+            plain
+            elevation="1"
+            :dark="fSearchBySurname"
+            v-bind="attrs"
+            v-on="on"
+            @click="fSearchBySurname = !fSearchBySurname"
+          >
+            <v-icon>N</v-icon>
+          </v-btn>
+        </template>
+        <span>Search By Firstname</span>
+      </v-tooltip>
+
       <v-col cols="12" sm="6" md="4">
         <v-text-field
-          dense
-          @input="searchBySelectedParams()"
+          @input="
+            searchByName($event),
+            searchBySurname($event),
+            searchByResponsibility($event)
+          "
         />
       </v-col>
       <v-btn
         fab
         small
         plain
-        elevation="3"
+        elevation="1"
       >
         <v-icon>mdi-account-search</v-icon>
       </v-btn>
@@ -113,8 +151,10 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
+import { Debounce } from 'vue-debounce-decorator'
 
 import { IEmployee } from '~/models/employee'
+import { IQueryParams } from '~/models/query-params'
 
 import { EmployeesModule } from '~/store/employees'
 import { ProfessionsModule } from '~/store/professions'
@@ -127,11 +167,52 @@ import { AppModule } from '~/store/app'
   }
 })
 export default class PEmployees extends Vue {
-  public get employees () { return EmployeesModule.employees }
-  public get professionsArray () { return ProfessionsModule.professionsArray }
-  public get professions () { return ProfessionsModule.professions }
+  get employees () { return EmployeesModule.employees }
+  get professionsArray () { return ProfessionsModule.professionsArray }
+  get professions () { return ProfessionsModule.professions }
 
-  public loaded = EmployeesModule.loaded
+  loaded = EmployeesModule.loaded
+
+  fSearchByName = false
+  fSearchBySurname = false
+  fSearchByResponsibility = false
+
+  searchByParams: IQueryParams = {
+  }
+
+  searchByName (value: string) {
+    if (this.fSearchByName) {
+      this.searchByParams.name_like = value
+      this.search()
+    } else {
+      delete this.searchByParams.name_like
+    }
+  }
+
+  searchBySurname (value: string) {
+    if (this.fSearchBySurname) {
+      this.searchByParams.surname_like = value
+      this.search()
+    } else {
+      delete this.searchByParams.surname_like
+    }
+  }
+
+  async searchByResponsibility (value: string) {
+    if (this.fSearchByResponsibility) {
+      const params = await ProfessionsModule.findByResponsibility(value)
+      this.searchByParams.professions_like = params
+      this.search()
+    } else {
+      delete this.searchByParams.professions_like
+    }
+  }
+
+  @Debounce(400)
+  public async search () {
+    await EmployeesModule.CLEAR()
+    await EmployeesModule.SEARCH_EMPLOYEES(this.searchByParams)
+  }
 
   public async addNewEmployee () {
     await EmployeesModule.ADD_NEW_EMPLOYEE()

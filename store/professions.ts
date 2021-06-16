@@ -89,6 +89,17 @@ class Professions extends VuexModule {
     const result: IProfession | undefined = this.professions.get(title)
     return result
   }
+
+  @Action
+  findByResponsibility (resp: string) {
+    const titles: Array<string> = []
+    this.professions.forEach((profession, title) => {
+      if (profession.responsibilities.toString().toLowerCase().includes(resp.toLowerCase())) {
+        titles.push(title)
+      }
+    })
+    return titles
+  }
 }
 
 export const ProfessionsModule = getModule(Professions)

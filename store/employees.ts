@@ -32,6 +32,11 @@ class Employees extends VuexModule {
   public page = 1
   public step = 10
   public loaded = false
+  public searchParams: IQueryParams = {
+    name_like: null,
+    surname_like: null,
+    professions_like: null
+  }
 
   @Mutation
   async INIT () {
@@ -53,13 +58,19 @@ class Employees extends VuexModule {
     this.employees.push(...employees)
   }
 
-  // @Action appendEmployees ()
+  @Mutation
+  async SEARCH_EMPLOYEES (searchParams: IQueryParams) {
+    let params: IQueryParams = { _limit: this.limit, _page: this.page }
+    params = Object.assign(params, searchParams)
+    const response = await getEmployees(params)
+    const employees = response.data
+    this.employees.push(...employees)
+  }
 
   @Mutation
   CLEAR () {
     this.limit = 10
-    this.page = 0
-
+    this.page = 1
     this.employees.splice(0, this.employees.length)
   }
 
