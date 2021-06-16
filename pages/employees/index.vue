@@ -1,6 +1,25 @@
 <template>
   <v-row>
     <v-list class="col-12 px-3 d-flex">
+      <!-- TODO: это доделать
+      <v-btn-toggle
+        v-model="searchParams"
+        rounded
+      >
+        <v-btn>
+          <v-icon>mdi-format-align-left</v-icon>
+        </v-btn>
+        <v-btn>
+          <v-icon>mdi-format-align-center</v-icon>
+        </v-btn>
+        <v-btn>
+          <v-icon>mdi-format-align-right</v-icon>
+        </v-btn>
+        <v-btn>
+          <v-icon>mdi-format-align-justify</v-icon>
+        </v-btn>
+      </v-btn-toggle>
+      -->
       <v-col cols="12" sm="6" md="4">
         <v-text-field
           dense
