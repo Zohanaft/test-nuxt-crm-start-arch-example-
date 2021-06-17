@@ -4,11 +4,12 @@
       <v-tooltip bottom>
         <template #activator="{ on, attrs }">
           <v-btn
+            class="mr-3 pr-1"
             fab
             small
             plain
             elevation="1"
-            :dark="fSearchByResponsibility"
+            :color="fSearchByResponsibility ? 'primary' : ''"
             v-bind="attrs"
             v-on="on"
             @click="fSearchByResponsibility = !fSearchByResponsibility"
@@ -22,11 +23,12 @@
       <v-tooltip bottom>
         <template #activator="{ on, attrs }">
           <v-btn
+            class="mr-3 pr-1"
             fab
             small
             plain
             elevation="1"
-            :dark="fSearchByName"
+            :color="fSearchByName ? 'primary' : ''"
             v-bind="attrs"
             v-on="on"
             @click="fSearchByName = !fSearchByName"
@@ -40,11 +42,12 @@
       <v-tooltip bottom>
         <template #activator="{ on, attrs }">
           <v-btn
+            class="pr-1"
             fab
             small
             plain
             elevation="1"
-            :dark="fSearchBySurname"
+            :color="fSearchBySurname ? 'primary' : ''"
             v-bind="attrs"
             v-on="on"
             @click="fSearchBySurname = !fSearchBySurname"
@@ -69,8 +72,10 @@
         small
         plain
         elevation="1"
+        :href="`data:application/json;charset=utf-8,${objectToJson}`"
+        download
       >
-        <v-icon>mdi-account-search</v-icon>
+        <v-icon>mdi-upload</v-icon>
       </v-btn>
     </v-list>
     <v-list
@@ -129,6 +134,7 @@
           class="ma-1 pa-3"
         >
           <v-btn
+            v-show="!maxLoadedResources"
             block
             @click="loadMoreEmployees"
           >
@@ -168,8 +174,23 @@ import { AppModule } from '~/store/app'
 })
 export default class PEmployees extends Vue {
   get employees () { return EmployeesModule.employees }
+  get maxLoadedResources () { return EmployeesModule.maxLoadedResources }
   get professionsArray () { return ProfessionsModule.professionsArray }
   get professions () { return ProfessionsModule.professions }
+
+  // это отправится в dataUrl ограничение - 65535 символов (раньше было)
+  // есть еще библиотеки под подобные вещи, они по идее работают с сервером так или иначе
+  // этот вариант - чисто фронтовый, в противном случае - просто подтягивал бы файл с сервера
+  get objectToJson () {
+    const employeesCopy = JSON.parse(JSON.stringify(this.employees))
+    const json = JSON.stringify(employeesCopy.map((employee: IEmployee) => {
+      employee.professions = employee.professions.map((profession) => {
+        return JSON.stringify(this.professions.get(profession))
+      })
+      return employee
+    }))
+    return json
+  }
 
   loaded = EmployeesModule.loaded
 

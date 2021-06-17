@@ -28,10 +28,10 @@ import {
 class Employees extends VuexModule {
   public param: string = 'STORE TEST'
   public employees: Array<IEmployee> = []
-  public limit = 10
+  public limit = 12
   public page = 1
-  public step = 10
   public loaded = false
+  public maxLoadedResources = false
   public searchParams: IQueryParams = {
     name_like: null,
     surname_like: null,
@@ -56,6 +56,9 @@ class Employees extends VuexModule {
     const response = await getEmployees(params)
     const employees = response.data
     this.employees.push(...employees)
+    if (this.page * this.limit > this.employees.length) {
+      this.maxLoadedResources = true
+    }
   }
 
   @Mutation
@@ -69,7 +72,7 @@ class Employees extends VuexModule {
 
   @Mutation
   CLEAR () {
-    this.limit = 10
+    this.limit = 12
     this.page = 1
     this.employees.splice(0, this.employees.length)
   }
@@ -116,12 +119,6 @@ class Employees extends VuexModule {
       const index = employee!.professions!.findIndex(prof => prof === title)
       employee.professions!.splice(index, 1)
       patchEmployee(employee)
-    })
-
-    // на фронте
-    this.employees.forEach((employee) => {
-      const index = employee!.professions!.findIndex(prof => prof === title)
-      employee.professions!.splice(index, 1)
     })
   }
 
