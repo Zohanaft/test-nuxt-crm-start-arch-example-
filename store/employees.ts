@@ -39,26 +39,23 @@ class Employees extends VuexModule {
   }
 
   @Mutation
-  async INIT () {
-    if (this.loaded) { return }
-    const params = { _limit: this.limit, _page: this.page }
-    const response = await getEmployees(params)
-    const employees: Array<IEmployee> = response.data
+  APPEND_EMPLOYEES (employees: Array<IEmployee>) {
     this.employees.push(...employees)
-    this.loaded = true
   }
 
   @Mutation
-  async APPEND_EMPLOYEES () {
+  PAGE_INCREMENT () {
     this.page += 1
+  }
 
-    const params = { _limit: this.limit, _page: this.page }
-    const response = await getEmployees(params)
-    const employees = response.data
-    this.employees.push(...employees)
-    if (this.page * this.limit > this.employees.length) {
-      this.maxLoadedResources = true
-    }
+  @Mutation
+  SET_LOADED_STATE (value: boolean) {
+    this.loaded = value
+  }
+
+  @Mutation
+  CHECK_EMPLOYEES_MAX_CONTENT () {
+    this.maxLoadedResources = this.page * this.limit > this.employees.length
   }
 
   @Mutation
@@ -120,6 +117,28 @@ class Employees extends VuexModule {
       employee.professions!.splice(index, 1)
       patchEmployee(employee)
     })
+  }
+
+  @Action
+  async init () {
+    if (this.loaded) { return }
+    const params = { _limit: this.limit, _page: this.page }
+    const response = await getEmployees(params)
+    const employees: Array<IEmployee> = response.data
+    this.CLEAR()
+    this.APPEND_EMPLOYEES(employees)
+    this.CHECK_EMPLOYEES_MAX_CONTENT()
+    this.SET_LOADED_STATE(true)
+  }
+
+  @Action
+  async appendEmployees () {
+    this.PAGE_INCREMENT()
+    const params = { _limit: this.limit, _page: this.page }
+    const response = await getEmployees(params)
+    const employees = response.data
+    this.APPEND_EMPLOYEES(employees)
+    this.CHECK_EMPLOYEES_MAX_CONTENT()
   }
 
   @Action

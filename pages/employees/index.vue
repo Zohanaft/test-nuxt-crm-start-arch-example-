@@ -33,10 +33,10 @@
             v-on="on"
             @click="fSearchByName = !fSearchByName"
           >
-            <v-icon>S</v-icon>
+            <v-icon>N</v-icon>
           </v-btn>
         </template>
-        <span>Search By Surname</span>
+        <span>Search By Name</span>
       </v-tooltip>
 
       <v-tooltip bottom>
@@ -52,10 +52,10 @@
             v-on="on"
             @click="fSearchBySurname = !fSearchBySurname"
           >
-            <v-icon>N</v-icon>
+            <v-icon>S</v-icon>
           </v-btn>
         </template>
-        <span>Search By Firstname</span>
+        <span>Search By Surname</span>
       </v-tooltip>
 
       <v-col cols="12" sm="6" md="4">
@@ -169,7 +169,7 @@ import { AppModule } from '~/store/app'
 
 @Component({
   async fetch () {
-    await EmployeesModule.INIT()
+    await EmployeesModule.init()
   }
 })
 export default class PEmployees extends Vue {
@@ -184,8 +184,15 @@ export default class PEmployees extends Vue {
   get objectToJson () {
     const employeesCopy = JSON.parse(JSON.stringify(this.employees))
     const json = JSON.stringify(employeesCopy.map((employee: IEmployee) => {
+      // проверяю professions на существование,
+      // т.к. нужно сериализовать объект который нужно получить из profession
+      if (employee.professions === undefined) {
+        return employee
+      }
+      // этот объект нужен только для вывода информации
+      // @ts-ignore Type 'IProfession[]' is not assignable to type 'string[]'.
       employee.professions = employee.professions.map((profession) => {
-        return JSON.stringify(this.professions.get(profession))
+        return this.professions.get(profession)
       })
       return employee
     }))
@@ -198,8 +205,7 @@ export default class PEmployees extends Vue {
   fSearchBySurname = false
   fSearchByResponsibility = false
 
-  searchByParams: IQueryParams = {
-  }
+  searchByParams: IQueryParams = {}
 
   searchByName (value: string) {
     if (this.fSearchByName) {
@@ -207,6 +213,7 @@ export default class PEmployees extends Vue {
       this.search()
     } else {
       delete this.searchByParams.name_like
+      this.search()
     }
   }
 
@@ -216,16 +223,18 @@ export default class PEmployees extends Vue {
       this.search()
     } else {
       delete this.searchByParams.surname_like
+      this.search()
     }
   }
 
   async searchByResponsibility (value: string) {
     if (this.fSearchByResponsibility) {
-      const params = await ProfessionsModule.findByResponsibility(value)
+      const params = await ProfessionsModule.findByResponsibility(value) // получаем промис
       this.searchByParams.professions_like = params
       this.search()
     } else {
       delete this.searchByParams.professions_like
+      this.search()
     }
   }
 
@@ -239,19 +248,16 @@ export default class PEmployees extends Vue {
     await EmployeesModule.ADD_NEW_EMPLOYEE()
   }
 
-  public async loadMoreEmployees () {
-    await EmployeesModule.APPEND_EMPLOYEES()
-  }
-
   public async removeEmployee (id: number) {
     await EmployeesModule.DELETE_EMPLOYE(id)
   }
 
-  public async updateEmployee (employee: IEmployee) {
-    await EmployeesModule.patchEmployee(employee)
+  public async loadMoreEmployees () {
+    await EmployeesModule.appendEmployees()
   }
 
-  public async searchBySelectedParams () {
+  public async updateEmployee (employee: IEmployee) {
+    await EmployeesModule.patchEmployee(employee)
   }
 
   created () {
