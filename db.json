@@ -18,7 +18,7 @@
     {
       "name": "Hideo",
       "surname": "Kodzima",
-      "birthday": "1946-11-07",
+      "birthday": "1946-11-14",
       "picture": {
         "large": "https://randomuser.me/api/portraits/men/26.jpg",
         "medium": "https://randomuser.me/api/portraits/med/men/26.jpg",
@@ -62,8 +62,8 @@
       ]
     },
     {
-      "name": "Bryan",
-      "surname": "Morgann",
+      "name": "Пенёк",
+      "surname": "Пеньковый",
       "birthday": "1970-09-03",
       "picture": {
         "large": "https://randomuser.me/api/portraits/men/0.jpg",
